@@ -13,10 +13,8 @@ class AddEntryVC: UIViewController {
     @IBOutlet weak var incomeview: UIView!
     @IBOutlet weak var expenseview: UIView!
     @IBOutlet weak var transferview: UIView!
-    @IBOutlet weak var addbuttonview: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        addbuttonview.layer.cornerRadius = 20
     }
 
     @IBAction func swithViews(_ sender: UISegmentedControl) {

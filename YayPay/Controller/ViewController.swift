@@ -89,7 +89,7 @@ extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource
 }
 extension ViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: self.collectionview.frame.height - 5)
+        return CGSize(width: 190, height: self.collectionview.frame.height - 5)
     }
     
     
@@ -114,8 +114,8 @@ extension ViewController{
                 print("error reading cards : \(err.localizedDescription)")
             }else{
                 for document in querySnapshot!.documents{
-                    let newcard = Card(accountnumber: document.data()["accountnumber"] as! Int, balance: document.data()["balance"] as! Int)
-                    print("detailes \(document.data()["accountnumber"] as! Int)   \(document.data()["balance"] as! Int)")
+                    let newcard = Card(accountnumber: document.data()["accountnumber"] as! Int, balance: document.data()["balance"] as! String)
+                    print("detailes \(document.data()["accountnumber"] as! Int)   \(document.data()["balance"] as! String)")
                     self.cards.append(newcard)
                 }
                 DispatchQueue.main.async {
@@ -126,44 +126,3 @@ extension ViewController{
     }
     
 }
-
-
-//func  read() {
-//
-//    db = Firestore.firestore()
-//    postss = []
-//
-//    db.collection("postss").getDocuments() { (querySnapshot, err) in
-//        if let err = err {
-//            print("Error getting documents: \(err)")
-//        } else {
-//            for document in querySnapshot!.documents {
-//
-//                let newpost = Post()
-//                print("\(document.documentID) => \(document.data())")
-//                self.posts.append(document.documentID)
-//                newpost.post = "\(document.data()["postdata"] as! String)"
-//                newpost.imagename = "\(document.documentID)"
-//
-//                // Create a reference to the file you want to download
-//                let storageRef = Storage.storage().reference(withPath: "images/\(document.documentID).jpg")
-//
-//                // Download in memory with a maximum allowed size of 4MB (4 * 1024 * 1024 bytes)
-//                storageRef.getData(maxSize: 4 * 1024 * 1024) { data, error in
-//                    if let error = error {
-//                        print("error downloading image:\(error)")
-//                        
-//                    } else {
-//                        // Data for "images/island.jpg" is returned
-//                        newpost.image = UIImage(data: data!)
-//                        self.postss.append(newpost)
-//                        DispatchQueue.main.async {
-//                            self.tableview.reloadData()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        SVProgressHUD.dismiss()
-//    }
-//}

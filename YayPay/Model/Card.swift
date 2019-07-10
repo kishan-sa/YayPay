@@ -10,8 +10,8 @@ import Foundation
 
 class Card {
     var accountnumber : Int?
-    var balance : Int?
-    init(accountnumber : Int , balance : Int) {
+    var balance : String?
+    init(accountnumber : Int , balance : String) {
         self.accountnumber = accountnumber
         self.balance = balance
     }

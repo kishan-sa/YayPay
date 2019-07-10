@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class ExpenseVC: UIViewController {
     
@@ -16,10 +18,15 @@ class ExpenseVC: UIViewController {
     @IBOutlet weak var categorylabel: UILabel!
     @IBOutlet weak var moneyTF: UITextField!
     @IBOutlet weak var reasonTF: UITextField!
+    @IBOutlet weak var addexpenseview: UIView!
     
+    var db : Firestore!
+    
+    var totalexp = 0
+    var datestring = ""
     var category = ["Food","Fuel","Movie","Shopping"]
     var categoryimage = [UIImage(named: "food"),UIImage(named: "fuel"),UIImage(named: "movies"),UIImage(named: "shopping")]
-    var images = [#imageLiteral(resourceName: "food"),#imageLiteral(resourceName: "fuel"),#imageLiteral(resourceName: "movies"),#imageLiteral(resourceName: "movies")]
+    var images = [#imageLiteral(resourceName: "Food"),#imageLiteral(resourceName: "Fuel"),#imageLiteral(resourceName: "Movies"),#imageLiteral(resourceName: "Shopping")]
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 10.0,left: 20.0, bottom: 10.0,right: 20.0)
     
@@ -31,6 +38,61 @@ class ExpenseVC: UIViewController {
 
         collectionview.delegate = self
         collectionview.dataSource = self
+        addexpenseview.layer.cornerRadius = 20
+        
+        let datecomp2 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+//        currentdateindex = datecomp2.month! - 1
+//        currentyear = datecomp2.year!
+//        currentdate = datecomp2.month! - 1
+        datestring = "\(datecomp2.month! - 1) \(datecomp2.year!)"
+        readtotalexp()
+    }
+    
+    @IBAction func addexp(_ sender: Any) {
+        addexpense()
+        addtotalexp()
+    }
+}
+
+extension ExpenseVC {
+    
+    func addexpense(){
+        let userid = Auth.auth().currentUser?.uid
+        db = Firestore.firestore()
+        db.collection("users").document("\(userid!)").collection("expense").document("\(datestring)").collection("expenses").addDocument(data: ["expense":"\(moneyTF.text!)","reason":"\(reasonTF.text!)","category":"\(categorylabel.text!)"]) { (err) in
+            if let error = err {
+                print("error : \(error.localizedDescription)")
+            }else{
+                print("expense added")
+            }
+        }
+    }
+    func addtotalexp() {
+        let userid = Auth.auth().currentUser?.uid
+        readtotalexp()
+        
+        totalexp = totalexp + Int(moneyTF.text!)!
+        db.collection("users").document("\(userid!)").collection("expense").document("\(datestring)").setData(["total":"\(totalexp)"]) { (error) in
+            if let error = error{
+                print("errrror:\(error)")
+            }else{
+                print("total set")
+            }
+        }
+    }
+    func readtotalexp(){
+        db = Firestore.firestore()
+        let userid = Auth.auth().currentUser?.uid
+        
+        db.collection("users").document("\(userid!)").collection("expense").document("\(datestring)").getDocument { (documentSnapshot, error) in
+            if let err = error {
+                print("error : \(err)")
+            }else{
+                print(documentSnapshot?.data()!["total"] as! String)
+                //                self.incomelabel.text = (documentSnapshot?.data()!["income"] as! String)
+                self.totalexp = Int(documentSnapshot?.data()!["total"] as! String)!
+            }
+        }
     }
 }
 

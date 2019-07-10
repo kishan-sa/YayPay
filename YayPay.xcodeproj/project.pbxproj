@@ -31,6 +31,8 @@
 		C8FB8B8522D3754200A90219 /* InComingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8FB8B8322D3754200A90219 /* InComingCell.xib */; };
 		C8FB8B8722D37AFE00A90219 /* ReiceveMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB8B8622D37AFE00A90219 /* ReiceveMoneyVC.swift */; };
 		C8FB8B8922D37B3500A90219 /* ManageMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB8B8822D37B3500A90219 /* ManageMoneyVC.swift */; };
+		C8FD06D122D5EDE20018A537 /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FD06D022D5EDE20018A537 /* ExpenseCell.swift */; };
+		C8FD06D322D60CF50018A537 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FD06D222D60CF50018A537 /* Expense.swift */; };
 		D33A2641A7C79B5EE027E470 /* Pods_YayPay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03148839735B8A0F4767E9A /* Pods_YayPay.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		C8FB8B8322D3754200A90219 /* InComingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InComingCell.xib; sourceTree = "<group>"; };
 		C8FB8B8622D37AFE00A90219 /* ReiceveMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReiceveMoneyVC.swift; sourceTree = "<group>"; };
 		C8FB8B8822D37B3500A90219 /* ManageMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMoneyVC.swift; sourceTree = "<group>"; };
+		C8FD06D022D5EDE20018A537 /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
+		C8FD06D222D60CF50018A537 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 			children = (
 				C8FB8B7522D35C3600A90219 /* Contact.swift */,
 				C8FA66C022D5B33A007C32A9 /* Card.swift */,
+				C8FD06D222D60CF50018A537 /* Expense.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 				C8FB8B7722D3640D00A90219 /* ContactCell.swift */,
 				C8F958A022D4621F00BB9E9B /* CategoryCell.swift */,
 				C8FA66BE22D5A03D007C32A9 /* CardCell.swift */,
+				C8FD06D022D5EDE20018A537 /* ExpenseCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -304,6 +310,7 @@
 				C8FA66C122D5B33A007C32A9 /* Card.swift in Sources */,
 				C8F9589F22D44D4500BB9E9B /* ExpenseVC.swift in Sources */,
 				C821F17A22D4819C00945161 /* OTPVC.swift in Sources */,
+				C8FD06D322D60CF50018A537 /* Expense.swift in Sources */,
 				C8F9589D22D44D2D00BB9E9B /* IncomeVC.swift in Sources */,
 				C8F958A122D4621F00BB9E9B /* CategoryCell.swift in Sources */,
 				C8FB8B8422D3754200A90219 /* InComingCell.swift in Sources */,
@@ -312,6 +319,7 @@
 				C8FB8B8022D3751000A90219 /* OutGoingCell.swift in Sources */,
 				C8FB8B8722D37AFE00A90219 /* ReiceveMoneyVC.swift in Sources */,
 				C8FB8B7822D3640D00A90219 /* ContactCell.swift in Sources */,
+				C8FD06D122D5EDE20018A537 /* ExpenseCell.swift in Sources */,
 				C8FB8B7622D35C3600A90219 /* Contact.swift in Sources */,
 				C802A0B822D3210C00FF1741 /* ViewController.swift in Sources */,
 				C8FB8B7322D3534E00A90219 /* SendMoneyVC.swift in Sources */,
