@@ -26,9 +26,9 @@ class SignUpVC: UIViewController {
     @IBAction func submitPressed(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "otpvc") as! OTPVC
-        if let phoneno = PhonenumberTF.getRawPhoneNumber(){
+        if PhonenumberTF.getRawPhoneNumber() != nil{
             
-            nextViewController.phonenumber = phoneno
+            nextViewController.phonenumber = PhonenumberTF.getFormattedPhoneNumber(format: .E164)!
         }
         navigationController?.pushViewController(nextViewController, animated: true)
     }

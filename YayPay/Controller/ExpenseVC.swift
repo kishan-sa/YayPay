@@ -12,8 +12,6 @@ import FirebaseFirestore
 
 class ExpenseVC: UIViewController {
     
-    
-
     @IBOutlet weak var collectionview: UICollectionView!
     @IBOutlet weak var categorylabel: UILabel!
     @IBOutlet weak var moneyTF: UITextField!
@@ -26,7 +24,7 @@ class ExpenseVC: UIViewController {
     var datestring = ""
     var category = ["Food","Fuel","Movie","Shopping"]
     var categoryimage = [UIImage(named: "food"),UIImage(named: "fuel"),UIImage(named: "movies"),UIImage(named: "shopping")]
-    var images = [#imageLiteral(resourceName: "Food"),#imageLiteral(resourceName: "Fuel"),#imageLiteral(resourceName: "Movies"),#imageLiteral(resourceName: "Shopping")]
+    var images = [#imageLiteral(resourceName: "Food"),#imageLiteral(resourceName: "Fuel"),#imageLiteral(resourceName: "Movie"),#imageLiteral(resourceName: "Shopping")]
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 10.0,left: 20.0, bottom: 10.0,right: 20.0)
     
@@ -45,12 +43,28 @@ class ExpenseVC: UIViewController {
 //        currentyear = datecomp2.year!
 //        currentdate = datecomp2.month! - 1
         datestring = "\(datecomp2.month! - 1) \(datecomp2.year!)"
-        readtotalexp()
+        //readtotalexp()
     }
     
     @IBAction func addexp(_ sender: Any) {
-        addexpense()
-        addtotalexp()
+        if moneyTF.text == ""{
+            let alert = UIAlertController(title: "Money", message: "Enter Money", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else if reasonTF.text == ""{
+            let alert = UIAlertController(title: "Reason", message: "Enter Reason", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if (categorylabel.text!) == "Which category does this belong to?"{
+            let alert = UIAlertController(title: "Category", message: "Select Any CateGory", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            addexpense()
+            readtotalexp()
+        }
+        
     }
 }
 
@@ -68,8 +82,8 @@ extension ExpenseVC {
         }
     }
     func addtotalexp() {
+        
         let userid = Auth.auth().currentUser?.uid
-        readtotalexp()
         
         totalexp = totalexp + Int(moneyTF.text!)!
         db.collection("users").document("\(userid!)").collection("expense").document("\(datestring)").setData(["total":"\(totalexp)"]) { (error) in
@@ -89,8 +103,8 @@ extension ExpenseVC {
                 print("error : \(err)")
             }else{
                 print(documentSnapshot?.data()!["total"] as! String)
-                //                self.incomelabel.text = (documentSnapshot?.data()!["income"] as! String)
                 self.totalexp = Int(documentSnapshot?.data()!["total"] as! String)!
+                self.addtotalexp()
             }
         }
     }
@@ -113,31 +127,24 @@ extension ExpenseVC : UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         categorylabel.text = category[indexPath.row]
     }
-    
 }
 
 
 extension ExpenseVC : UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
         
-                let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-                let availableWidth = view.frame.width - paddingSpace
-                let widthPerItem = availableWidth / itemsPerRow
-        
-                return CGSize(width: widthPerItem, height: 200)
-            }
-    
-    
-            func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-                return sectionInsets
-            }
-    
-    
-            func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-                return sectionInsets.left
-            }
-    
+        return CGSize(width: widthPerItem, height: 200)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
 }
 
 

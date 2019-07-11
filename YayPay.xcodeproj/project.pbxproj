@@ -31,6 +31,7 @@
 		C8FB8B8522D3754200A90219 /* InComingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8FB8B8322D3754200A90219 /* InComingCell.xib */; };
 		C8FB8B8722D37AFE00A90219 /* ReiceveMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB8B8622D37AFE00A90219 /* ReiceveMoneyVC.swift */; };
 		C8FB8B8922D37B3500A90219 /* ManageMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB8B8822D37B3500A90219 /* ManageMoneyVC.swift */; };
+		C8FBBC4A22D71B4600B95A32 /* NearbySendMoneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FBBC4922D71B4600B95A32 /* NearbySendMoneyVC.swift */; };
 		C8FD06D122D5EDE20018A537 /* ExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FD06D022D5EDE20018A537 /* ExpenseCell.swift */; };
 		C8FD06D322D60CF50018A537 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FD06D222D60CF50018A537 /* Expense.swift */; };
 		D33A2641A7C79B5EE027E470 /* Pods_YayPay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03148839735B8A0F4767E9A /* Pods_YayPay.framework */; };
@@ -66,6 +67,7 @@
 		C8FB8B8322D3754200A90219 /* InComingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InComingCell.xib; sourceTree = "<group>"; };
 		C8FB8B8622D37AFE00A90219 /* ReiceveMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReiceveMoneyVC.swift; sourceTree = "<group>"; };
 		C8FB8B8822D37B3500A90219 /* ManageMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageMoneyVC.swift; sourceTree = "<group>"; };
+		C8FBBC4922D71B4600B95A32 /* NearbySendMoneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbySendMoneyVC.swift; sourceTree = "<group>"; };
 		C8FD06D022D5EDE20018A537 /* ExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCell.swift; sourceTree = "<group>"; };
 		C8FD06D222D60CF50018A537 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +111,7 @@
 				C802A0B522D3210C00FF1741 /* AppDelegate.swift */,
 				C802A0BE22D3210D00FF1741 /* LaunchScreen.storyboard */,
 				C802A0C122D3210D00FF1741 /* Info.plist */,
+				C821F17B22D48EB400945161 /* GoogleService-Info.plist */,
 			);
 			path = YayPay;
 			sourceTree = "<group>";
@@ -136,7 +139,7 @@
 				C8F9589E22D44D4500BB9E9B /* ExpenseVC.swift */,
 				C821F17722D47E3700945161 /* SignUpVC.swift */,
 				C821F17922D4819C00945161 /* OTPVC.swift */,
-				C821F17B22D48EB400945161 /* GoogleService-Info.plist */,
+				C8FBBC4922D71B4600B95A32 /* NearbySendMoneyVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				C821F17A22D4819C00945161 /* OTPVC.swift in Sources */,
 				C8FD06D322D60CF50018A537 /* Expense.swift in Sources */,
 				C8F9589D22D44D2D00BB9E9B /* IncomeVC.swift in Sources */,
+				C8FBBC4A22D71B4600B95A32 /* NearbySendMoneyVC.swift in Sources */,
 				C8F958A122D4621F00BB9E9B /* CategoryCell.swift in Sources */,
 				C8FB8B8422D3754200A90219 /* InComingCell.swift in Sources */,
 				C8FA66BF22D5A03D007C32A9 /* CardCell.swift in Sources */,

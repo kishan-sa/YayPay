@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     }
     @IBAction func recieveButton(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "managemoney") as! ManageMoneyVC
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "reicevemoney") as! ReiceveMoneyVC
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     @IBAction func manageButton(_ sender: Any) {
@@ -54,6 +54,12 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     @IBAction func offerButton(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+        }catch{
+            print(error)
+        }
+        
     }
 }
 

@@ -41,6 +41,7 @@ class ManageMoneyVC: UIViewController {
         currentdate = datecomp2.month! - 1
         datelabel.text = "\(dates[currentdate!]) \(currentyear!)"
         readincome()
+        readtotalexpense()
         readxepenses()
         collectionview.delegate = self
         collectionview.dataSource = self
@@ -85,8 +86,12 @@ extension ManageMoneyVC {
             if let err = error {
                 print("error : \(err.localizedDescription)")
             }else{
-                print(documentSnapshot?.data()!["income"] as! String)
-                self.incomelabel.text = (documentSnapshot?.data()!["income"] as! String)
+                if let d = documentSnapshot?.data()?["income"]{
+                    print(d)
+                    
+                    self.incomelabel.text = (documentSnapshot?.data()!["income"] as! String)
+                    self.incomprogress.startProgress(to: 100, duration: 2)
+                }
                 
             }
         }
@@ -94,12 +99,15 @@ extension ManageMoneyVC {
     func readtotalexpense(){
         let userid = Auth.auth().currentUser?.uid
         db = Firestore.firestore()
-        db.collection("users").document("\(userid!)").collection("income").document("\(datelabel.text!)").getDocument { (documentSnapshot, error) in
+        db.collection("users").document("\(userid!)").collection("expense").document("\(currentdateindex!) 2019").getDocument { (documentSnapshot, error) in
             if let err = error {
                 print("error : \(err.localizedDescription)")
             }else{
-                print(documentSnapshot?.data()!["income"] as! String)
-                self.incomelabel.text = (documentSnapshot?.data()!["income"] as! String)
+                if let d = documentSnapshot?.data()?["total"]{
+                    print(documentSnapshot?.data()!["total"] as! String)
+                    self.expenselabel.text = (documentSnapshot?.data()!["total"] as! String)
+                    self.expenseprogress.startProgress(to: CGFloat(Int(documentSnapshot?.data()!["total"] as! String)! / Int(documentSnapshot?.data()!["total"] as! String)!), duration: 2)
+                }
                 
             }
         }

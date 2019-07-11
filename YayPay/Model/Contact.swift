@@ -12,3 +12,4 @@ class Contact {
     var name = ""
     var phonenumber = ""
 }
+

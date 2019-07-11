@@ -22,10 +22,12 @@ class OTPVC: UIViewController {
 
     @IBAction func LoginPressed(_ sender: Any) {
         let otp = otpTF.text
-        let sp = "+91\(phonenumber)"
+        let sp = "\(phonenumber)"
+        
+        let sp2 = sp.replacingOccurrences(of: " ", with: "")
         
         Auth.auth().settings!.isAppVerificationDisabledForTesting = true
-        PhoneAuthProvider.provider().verifyPhoneNumber(sp, uiDelegate:nil) {
+        PhoneAuthProvider.provider().verifyPhoneNumber(sp2, uiDelegate:nil) {
             verificationID, error in
             if (error != nil) {
                 // Handles error

@@ -45,6 +45,8 @@ class SendMoneyVC: UIViewController {
             newcontact.phonenumber = i.phoneNumbers[0].value.stringValue
             contactsmodel.append(newcontact)
         }
+        print(contactsmodel.last!.phonenumber)
+        
         //reload table after model is loaded
         tableview.reloadData()
     }
@@ -52,6 +54,13 @@ class SendMoneyVC: UIViewController {
     @IBAction func backPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func nearby(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "near") as! NearbySendMoneyVC
+        navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
 }
 
 
