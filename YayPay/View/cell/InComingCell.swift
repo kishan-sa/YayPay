@@ -10,6 +10,8 @@ import UIKit
 
 class InComingCell: UITableViewCell {
 
+    @IBOutlet weak var moneylabel: UILabel!
+    @IBOutlet weak var reasonlabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

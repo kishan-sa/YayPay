@@ -11,4 +11,5 @@ target 'YayPay' do
     pod 'UICircularProgressRing'
     pod 'FlagPhoneNumber'
     pod 'Firebase/Core'
+    pod 'Firebase/Database'
 end

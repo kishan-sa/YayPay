@@ -104,8 +104,8 @@ extension ManageMoneyVC {
                 print("error : \(err.localizedDescription)")
             }else{
                 if let d = documentSnapshot?.data()?["total"]{
-                    print(documentSnapshot?.data()!["total"] as! String)
-                    self.expenselabel.text = (documentSnapshot?.data()!["total"] as! String)
+                    print(d as! String)
+                    self.expenselabel.text = (d  as! String)
                     self.expenseprogress.startProgress(to: CGFloat(Int(documentSnapshot?.data()!["total"] as! String)! / Int(documentSnapshot?.data()!["total"] as! String)!), duration: 2)
                 }
                 

@@ -37,6 +37,9 @@ class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
         locationManager.startUpdatingLocation()
     }
 
+    @IBAction func backpressed(_ sender: Any) {
+        
+    }
     
     
     //Write the didUpdateLocations method here:

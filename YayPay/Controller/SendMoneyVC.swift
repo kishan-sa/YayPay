@@ -8,6 +8,8 @@
 
 import UIKit
 import Contacts
+import FirebaseAuth
+import Firebase
 
 
 class SendMoneyVC: UIViewController {
@@ -16,13 +18,16 @@ class SendMoneyVC: UIViewController {
     var contacts = [CNContact]()
     let store = CNContactStore()
     var contactsmodel = [Contact]()
+    var ref : DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-
         tableview.delegate = self
         tableview.dataSource = self
+        ref = Database.database().reference()
+        
+        readphonenumbers()
         
         //fetch contacts
         let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName) , CNContactPhoneNumbersKey as CNKeyDescriptor]
@@ -38,17 +43,21 @@ class SendMoneyVC: UIViewController {
             print("unable to fetch contacts")
         }
         
-        //loadind model
+        //loading model
         for i in contacts{
             let newcontact = Contact()
             newcontact.name = i.givenName
             newcontact.phonenumber = i.phoneNumbers[0].value.stringValue
-            contactsmodel.append(newcontact)
+            newcontact.format()
+            checkphone(number: newcontact)
+            
+            //contactsmodel.append(newcontact)
+            
         }
-        print(contactsmodel.last!.phonenumber)
+        //print(contactsmodel.last!.phonenumber)
         
         //reload table after model is loaded
-        tableview.reloadData()
+        //tableview.reloadData()
     }
 
     @IBAction func backPressed(_ sender: Any) {
@@ -64,7 +73,7 @@ class SendMoneyVC: UIViewController {
 }
 
 
-//MARK :- table's methods
+//MARK:- table's methods
 extension SendMoneyVC : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactsmodel.count
@@ -90,6 +99,34 @@ extension SendMoneyVC : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
-    
+}
+extension SendMoneyVC{
+    func readphonenumbers(){
+        let userid = Auth.auth().currentUser?.uid
+        ref.child("users").child(" \(userid!) ").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if let value = snapshot.value as? NSDictionary{
+                let username = value["phonenumber"] as! String
+                print("realtime : \(username)")
+            }
+        
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    func checkphone(number : Contact){
+        
+        ref.child("users").child(number.phonenumber).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if (snapshot.value as? NSDictionary) != nil{
+                self.contactsmodel.append(number)
+                DispatchQueue.main.async {
+                    self.tableview.reloadData()
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+            
+        }
+    }
 }

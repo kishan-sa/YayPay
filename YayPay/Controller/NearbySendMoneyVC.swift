@@ -36,6 +36,8 @@ class NearbySendMoneyVC: UIViewController ,CLLocationManagerDelegate{
         readreceivers()
     }
 
+    @IBAction func backpressed(_ sender: Any) {
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.first
         locationManager.stopUpdatingLocation()
@@ -83,9 +85,10 @@ extension NearbySendMoneyVC : UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "chatvc") as! ChatVC
-//        navigationController?.pushViewController(nextViewController, animated: true)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "chatvc") as! ChatVC
+        nextViewController.phonenofromsendmoney = nearby[indexPath.row]
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
 

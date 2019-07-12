@@ -15,6 +15,9 @@
 		C821F17822D47E3700945161 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C821F17722D47E3700945161 /* SignUpVC.swift */; };
 		C821F17A22D4819C00945161 /* OTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C821F17922D4819C00945161 /* OTPVC.swift */; };
 		C821F17C22D48EB400945161 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C821F17B22D48EB400945161 /* GoogleService-Info.plist */; };
+		C82CC1C822D8576F006DD6C0 /* PinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1C722D8576F006DD6C0 /* PinVC.swift */; };
+		C82CC1CC22D86532006DD6C0 /* PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1CB22D86532006DD6C0 /* PayVC.swift */; };
+		C82CC1CE22D8B431006DD6C0 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1CD22D8B431006DD6C0 /* Payment.swift */; };
 		C8F9589B22D43E3400BB9E9B /* AddEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589A22D43E3400BB9E9B /* AddEntryVC.swift */; };
 		C8F9589D22D44D2D00BB9E9B /* IncomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589C22D44D2D00BB9E9B /* IncomeVC.swift */; };
 		C8F9589F22D44D4500BB9E9B /* ExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589E22D44D4500BB9E9B /* ExpenseVC.swift */; };
@@ -51,6 +54,9 @@
 		C821F17722D47E3700945161 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C821F17922D4819C00945161 /* OTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVC.swift; sourceTree = "<group>"; };
 		C821F17B22D48EB400945161 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C82CC1C722D8576F006DD6C0 /* PinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinVC.swift; sourceTree = "<group>"; };
+		C82CC1CB22D86532006DD6C0 /* PayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayVC.swift; sourceTree = "<group>"; };
+		C82CC1CD22D8B431006DD6C0 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		C8F9589A22D43E3400BB9E9B /* AddEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryVC.swift; sourceTree = "<group>"; };
 		C8F9589C22D44D2D00BB9E9B /* IncomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeVC.swift; sourceTree = "<group>"; };
 		C8F9589E22D44D4500BB9E9B /* ExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseVC.swift; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 				C8FB8B7522D35C3600A90219 /* Contact.swift */,
 				C8FA66C022D5B33A007C32A9 /* Card.swift */,
 				C8FD06D222D60CF50018A537 /* Expense.swift */,
+				C82CC1CD22D8B431006DD6C0 /* Payment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +147,8 @@
 				C821F17722D47E3700945161 /* SignUpVC.swift */,
 				C821F17922D4819C00945161 /* OTPVC.swift */,
 				C8FBBC4922D71B4600B95A32 /* NearbySendMoneyVC.swift */,
+				C82CC1C722D8576F006DD6C0 /* PinVC.swift */,
+				C82CC1CB22D86532006DD6C0 /* PayVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8FB8B7D22D36E2F00A90219 /* ChatVC.swift in Sources */,
+				C82CC1C822D8576F006DD6C0 /* PinVC.swift in Sources */,
 				C8FA66C122D5B33A007C32A9 /* Card.swift in Sources */,
 				C8F9589F22D44D4500BB9E9B /* ExpenseVC.swift in Sources */,
 				C821F17A22D4819C00945161 /* OTPVC.swift in Sources */,
@@ -326,9 +336,11 @@
 				C8FD06D122D5EDE20018A537 /* ExpenseCell.swift in Sources */,
 				C8FB8B7622D35C3600A90219 /* Contact.swift in Sources */,
 				C802A0B822D3210C00FF1741 /* ViewController.swift in Sources */,
+				C82CC1CC22D86532006DD6C0 /* PayVC.swift in Sources */,
 				C8FB8B7322D3534E00A90219 /* SendMoneyVC.swift in Sources */,
 				C8F9589B22D43E3400BB9E9B /* AddEntryVC.swift in Sources */,
 				C821F17822D47E3700945161 /* SignUpVC.swift in Sources */,
+				C82CC1CE22D8B431006DD6C0 /* Payment.swift in Sources */,
 				C802A0B622D3210C00FF1741 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
