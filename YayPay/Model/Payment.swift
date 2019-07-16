@@ -12,9 +12,11 @@ class Payment {
     var amount = 0
     var reason = ""
     var iam = ""
-    required init(amount : Int , reason : String ,iam :String) {
+    var time = 0
+    required init(amount : Int , reason : String ,iam :String , time : Int) {
         self.amount = amount
         self.reason = reason
         self.iam = iam
+        self.time = time
     }
 }

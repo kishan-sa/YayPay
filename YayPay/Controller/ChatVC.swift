@@ -20,6 +20,7 @@ class ChatVC: UIViewController {
     @IBOutlet weak var namelabel: UILabel!
     @IBOutlet weak var phonenumberlabel: UILabel!
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var payview: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,9 @@ class ChatVC: UIViewController {
         tableview.dataSource = self
         tableview.register(UINib(nibName: "InComingCell", bundle: nil), forCellReuseIdentifier: "out")
         tableview.register(UINib(nibName: "OutGoingCell", bundle: nil), forCellReuseIdentifier: "in")
-        //it reads payments also
+        //it reads payments from userid of currentuser
         //readuserid()
-        
+        payview.layer.cornerRadius = 30
         namelabel.text = unamefromsendmoney
         phonenumberlabel.text = phonenofromsendmoney
         
@@ -48,42 +49,35 @@ class ChatVC: UIViewController {
     @IBAction func payPressed(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "pin") as! PinVC
-        nextViewController.passtopayvc = phonenofromsendmoney
+        nextViewController.passtopayvcphone = phonenofromsendmoney
+        nextViewController.passtopayvcname = unamefromsendmoney
         navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
+//MARK:- database methods
 extension ChatVC{
     func readpayments() {
+        payments = []
         let userid = Auth.auth().currentUser?.uid
-        
-        ref.child("payments").child(userid!).child(recieverid).observeSingleEvent(of: .value) { (snapshot) in
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            for (_, theValue) in postDict {
-                print(((theValue) as! Dictionary<String,String>)["amount"]!)
-                print(((theValue) as! Dictionary<String,String>)["reason"]!)
-                self.payments.append(Payment(amount: Int(((theValue) as! Dictionary<String,String>)["amount"]!)!, reason: ((theValue) as! Dictionary<String,String>)["reason"]!, iam: ((theValue) as! Dictionary<String,String>)["iam"]!))
-            }
-            print(self.payments.count)
-            
-            DispatchQueue.main.async {
-                self.tableview.reloadData()
-            }
-            
+        let q = (ref.child("payments").child(userid!).child(recieverid)).queryOrdered(byChild: "time")
+            q.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChildren(){
+                
+                let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+                for (_, theValue) in postDict {
+                    if let val = theValue as? Dictionary<String,Any> {
+                        self.payments.append(Payment(amount: Int("\(val["amount"]!)")! , reason: (val["reason"]! as? String)!, iam:(val["iam"]! as? String)!, time: Int("\(val["time"]!)")!))
+                    }
+                }
+                let pay = self.payments.sorted(by: { $0.time < $1.time })
+                self.payments = pay
+                DispatchQueue.main.async {
+                    self.tableview.reloadData()
+                }
+            }else{
+                print("no childern")
+            }  
         }
-        /*.observe(DataEventType.value, with: { (snapshot) in
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            for (_, theValue) in postDict {
-                print(((theValue) as! Dictionary<String,String>)["amount"]!)
-                print(((theValue) as! Dictionary<String,String>)["reason"]!)
-                self.payments.append(Payment(amount: Int(((theValue) as! Dictionary<String,String>)["amount"]!)!, reason: ((theValue) as! Dictionary<String,String>)["reason"]!, iam: ((theValue) as! Dictionary<String,String>)["iam"]!))
-            }
-            print(self.payments.count)
-            
-            DispatchQueue.main.async {
-                self.tableview.reloadData()
-            }
-            
-        })*/
     }
     func readuserid(){
         
@@ -96,6 +90,7 @@ extension ChatVC{
     }
 }
 
+//MARK:- table view's methods
 extension ChatVC : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return payments.count
@@ -104,19 +99,20 @@ extension ChatVC : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if payments[indexPath.row].iam == "sender"{
             let cell = tableView.dequeueReusableCell(withIdentifier: "out", for: indexPath) as! InComingCell
-            cell.moneylabel.text = "\(payments[indexPath.row].amount)"
+            cell.moneylabel.text = "$\(payments[indexPath.row].amount)"
             cell.reasonlabel.text = payments[indexPath.row].reason
+            cell.containerview.layer.cornerRadius = 10
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "in", for: indexPath) as! OutGoingCell
-            cell.moneylabel.text = "\(payments[indexPath.row].amount)"
+            cell.moneylabel.text = "$\(payments[indexPath.row].amount)"
             cell.reasonlabel.text = payments[indexPath.row].reason
+            cell.containerview.layer.cornerRadius = 10
             return cell
         }
-        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 95.0
+        return 120
     }
 
 }

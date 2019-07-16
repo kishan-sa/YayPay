@@ -12,6 +12,7 @@ class InComingCell: UITableViewCell {
 
     @IBOutlet weak var moneylabel: UILabel!
     @IBOutlet weak var reasonlabel: UILabel!
+    @IBOutlet weak var containerview: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -12,6 +12,7 @@
 		C802A0BB22D3210C00FF1741 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C802A0B922D3210C00FF1741 /* Main.storyboard */; };
 		C802A0BD22D3210D00FF1741 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C802A0BC22D3210D00FF1741 /* Assets.xcassets */; };
 		C802A0C022D3210D00FF1741 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C802A0BE22D3210D00FF1741 /* LaunchScreen.storyboard */; };
+		C8081A7122DDCC8A00DDCE43 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8081A7022DDCC8A00DDCE43 /* ProfileVC.swift */; };
 		C821F17822D47E3700945161 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C821F17722D47E3700945161 /* SignUpVC.swift */; };
 		C821F17A22D4819C00945161 /* OTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C821F17922D4819C00945161 /* OTPVC.swift */; };
 		C821F17C22D48EB400945161 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C821F17B22D48EB400945161 /* GoogleService-Info.plist */; };
@@ -51,6 +52,7 @@
 		C802A0BC22D3210D00FF1741 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C802A0BF22D3210D00FF1741 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C802A0C122D3210D00FF1741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8081A7022DDCC8A00DDCE43 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		C821F17722D47E3700945161 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C821F17922D4819C00945161 /* OTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVC.swift; sourceTree = "<group>"; };
 		C821F17B22D48EB400945161 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				C8FBBC4922D71B4600B95A32 /* NearbySendMoneyVC.swift */,
 				C82CC1C722D8576F006DD6C0 /* PinVC.swift */,
 				C82CC1CB22D86532006DD6C0 /* PayVC.swift */,
+				C8081A7022DDCC8A00DDCE43 /* ProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				C8FA66C122D5B33A007C32A9 /* Card.swift in Sources */,
 				C8F9589F22D44D4500BB9E9B /* ExpenseVC.swift in Sources */,
 				C821F17A22D4819C00945161 /* OTPVC.swift in Sources */,
+				C8081A7122DDCC8A00DDCE43 /* ProfileVC.swift in Sources */,
 				C8FD06D322D60CF50018A537 /* Expense.swift in Sources */,
 				C8F9589D22D44D2D00BB9E9B /* IncomeVC.swift in Sources */,
 				C8FBBC4A22D71B4600B95A32 /* NearbySendMoneyVC.swift in Sources */,

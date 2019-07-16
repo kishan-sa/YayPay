@@ -15,6 +15,8 @@ import Firebase
 class SendMoneyVC: UIViewController {
 
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var searchbar: UISearchBar!
+    
     var contacts = [CNContact]()
     let store = CNContactStore()
     var contactsmodel = [Contact]()
@@ -22,11 +24,16 @@ class SendMoneyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.navigationBar.isHidden = true
         tableview.delegate = self
         tableview.dataSource = self
+        searchbar.backgroundImage = UIImage()
+        searchbar.setImage(UIImage(named: "search"), for: .search, state: .normal)
+        searchbar.layer.backgroundColor = UIColor.clear.cgColor
+        searchbar.backgroundColor = UIColor.clear
+        searchbar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
         ref = Database.database().reference()
-        
         readphonenumbers()
         
         //fetch contacts
@@ -35,7 +42,6 @@ class SendMoneyVC: UIViewController {
         do {
             try self.store.enumerateContacts(with: request) {
                 (contact, stop) in
-                // Array containing all unified contacts from everywhere
                 self.contacts.append(contact)
             }
         }
@@ -69,6 +75,7 @@ class SendMoneyVC: UIViewController {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "near") as! NearbySendMoneyVC
         navigationController?.pushViewController(nextViewController, animated: true)
     }
+   
     
 }
 
@@ -88,7 +95,7 @@ extension SendMoneyVC : UITableViewDelegate , UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: false)
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "chatvc") as! ChatVC
         nextViewController.phonenofromsendmoney = contactsmodel[indexPath.row].phonenumber
@@ -100,6 +107,8 @@ extension SendMoneyVC : UITableViewDelegate , UITableViewDataSource{
         return 80
     }
 }
+
+//MARK:- database methods
 extension SendMoneyVC{
     func readphonenumbers(){
         let userid = Auth.auth().currentUser?.uid

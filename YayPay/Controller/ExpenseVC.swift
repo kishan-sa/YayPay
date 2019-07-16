@@ -36,7 +36,7 @@ class ExpenseVC: UIViewController {
 
         collectionview.delegate = self
         collectionview.dataSource = self
-        addexpenseview.layer.cornerRadius = 20
+        addexpenseview.layer.cornerRadius = 30
         
         let datecomp2 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
 //        currentdateindex = datecomp2.month! - 1

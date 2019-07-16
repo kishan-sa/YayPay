@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var recievemoneyview: UIView!
     @IBOutlet weak var sendmoneyview: UIView!
     @IBOutlet weak var collectionview: UICollectionView!
+    @IBOutlet weak var namelabel: UILabel!
+    @IBOutlet weak var emaillabel: UILabel!
     
     
     private let itemsPerRow: CGFloat = 1
@@ -27,13 +29,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         readcards()
-        
+        readnameandemail()
         self.navigationController?.navigationBar.isHidden = true
         
-        offersview.layer.cornerRadius = self.view.frame.height * 0.1 / 2
-        sendmoneyview.layer.cornerRadius = self.view.frame.height * 0.1 / 2
-        recievemoneyview.layer.cornerRadius = self.view.frame.height * 0.1 / 2
-        managemoneyview.layer.cornerRadius = self.view.frame.height * 0.1 / 2
+        offersview.layer.cornerRadius = self.view.frame.height * 0.0805 / 2
+        sendmoneyview.layer.cornerRadius = self.view.frame.height * 0.0805 / 2
+        recievemoneyview.layer.cornerRadius = self.view.frame.height * 0.0805 / 2
+        managemoneyview.layer.cornerRadius = self.view.frame.height * 0.0805 / 2
         collectionview.delegate = self
         collectionview.dataSource = self
     }
@@ -60,6 +62,12 @@ class ViewController: UIViewController {
             print(error)
         }
         
+    }
+    
+    @IBAction func profileButton(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "profile") as! ProfileVC
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
 }
 
@@ -120,12 +128,28 @@ extension ViewController{
                 print("error reading cards : \(err.localizedDescription)")
             }else{
                 for document in querySnapshot!.documents{
-                    let newcard = Card(accountnumber: document.data()["accountnumber"] as! Int, balance: document.data()["balance"] as! String)
-                    print("detailes \(document.data()["accountnumber"] as! Int)   \(document.data()["balance"] as! String)")
+                    let newcard = Card(accountnumber: document.data()["accountnumber"] as! String, balance: document.data()["balance"] as! String)
+                    newcard.mask()
                     self.cards.append(newcard)
                 }
                 DispatchQueue.main.async {
                     self.collectionview.reloadData()
+                }
+            }
+        }
+    }
+    func readnameandemail(){
+        let userid = Auth.auth().currentUser?.uid
+        db = Firestore.firestore()
+        db.collection("users").document("\(userid!)").getDocument { (querySnapshot, err) in
+            if let err = err {
+                print("error reading cards : \(err.localizedDescription)")
+            }else{
+                if let name = querySnapshot?.data()?["name"]{
+                    self.namelabel.text = name as? String
+                }
+                if let email = querySnapshot?.data()?["email"]{
+                    self.emaillabel.text = email as? String
                 }
             }
         }

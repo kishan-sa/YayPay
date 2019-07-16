@@ -10,11 +10,15 @@ import UIKit
 import CoreLocation
 import FirebaseFirestore
 import FirebaseAuth
+import Firebase
 
 class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
     
     @IBOutlet weak var containerview: UIView!
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var imageview: UIImageView!
+    @IBOutlet weak var animateview: UIView!
+    
     let locationManager = CLLocationManager()
     var db : Firestore!
     var arraylat : [String] = []
@@ -23,10 +27,15 @@ class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
     var latitude : String = ""
     var longitude : String = ""
     var nearby : [String] = []
+    var a1 : [String] = []
+    var a2 : [String] = []
+    var ref : DatabaseReference!
+    let random = UUID.init().uuidString
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        ref = Database.database().reference()
         db = Firestore.firestore()
         readsenders()
         tableview.delegate = self
@@ -35,27 +44,42 @@ class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        animate()
+        _ = Timer.scheduledTimer(timeInterval: 4.1, target: self, selector: #selector(self.animate), userInfo: nil, repeats: true)
+        
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        deletereciever()
+    }
+    
+    @objc func animate(){
+        //animate image
+        UIView.animate(withDuration: 2.0, animations: {() -> Void in
+            self.imageview?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }, completion: {(_ finished: Bool) -> Void in
+            UIView.animate(withDuration: 2.0, animations: {() -> Void in
+                self.imageview?.transform = CGAffineTransform(scaleX: 1, y: 1)
+            })
+        })
     }
 
     @IBAction func backpressed(_ sender: Any) {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     
-    //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             let location = locations.first
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil
-        print("reciever :\t longitude = \(location!.coordinate.longitude),  latitude = \(location!.coordinate.latitude)")
+            print("reciever :\t longitude = \(location!.coordinate.longitude),  latitude = \(location!.coordinate.latitude)")
             latitude = String(location!.coordinate.latitude)
             longitude = String(location!.coordinate.longitude)
             addlocation()
     }
     
-    
-    
-    //Write the didFailWithError method here:
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
@@ -74,22 +98,33 @@ class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
         }
         print(nearby)
         if nearby.count != 0{
-            tableview.reloadData()
-            containerview.alpha = 1
+            readnameandnumber()
+            if a1.count != 0 {
+                tableview.reloadData()
+                animateview.alpha = 0
+                containerview.alpha = 1
+            }
         }
-        
     }
 }
 
 extension ReiceveMoneyVC : UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nearby.count
+        return a1.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nearbyre", for: indexPath) as! ContactCell
-        cell.namelabel.text = nearby[indexPath.row]
+        cell.namelabel.text = a1[indexPath.row]
+        cell.contactnumberlabel.text = a2[indexPath.row]
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "chatvc") as! ChatVC
+        nextViewController.phonenofromsendmoney = a2[indexPath.row]
+        nextViewController.unamefromsendmoney = a1[indexPath.row]
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80.0
@@ -99,31 +134,81 @@ extension ReiceveMoneyVC : UITableViewDataSource,UITableViewDelegate{
 
 extension ReiceveMoneyVC {
     func readsenders(){
-        db.collection("transfer").getDocuments { (querySnapshot, error) in
-            if let err = error{
-                print(err.localizedDescription)
-            }else{
-                for documnet in querySnapshot!.documents{
-                    print("\(documnet.data()["lat"] as! String)")
-                    print("\(documnet.data()["long"] as! String)")
-                    self.arraylat.append("\(documnet.data()["lat"] as! String)")
-                    self.arraylong.append("\(documnet.data()["long"] as! String)")
-                    self.arrayuser.append("\(documnet.data()["userid"] as! String)")
+        arrayuser = []
+        arraylong = []
+        arraylat = []
+        ref.child("senders").observe(.value) { (dataSnapshot) in
+            if dataSnapshot.hasChildren(){
+                let postDict = dataSnapshot.value as? [String : AnyObject] ?? [:]
+                for (_, theValue) in postDict{
+                    if let val = theValue as? Dictionary<String,Any>{
+                        if let lat = val["lat"] as? String{
+                            if let long = val["long"] as? String{
+                                if let user = val["userid"] as? String{
+                                    self.arrayuser.append(user)
+                                    self.arraylong.append(long)
+                                    self.arraylat.append(lat)
+                                }
+                            }
+                        }
+                    }
                 }
-                self.calculate()  
+                self.a1 = []
+                self.a2 = []
+                self.calculate()
             }
         }
     }
+    
     func addlocation(){
+        
         let userid = Auth.auth().currentUser?.uid
         
-        db.collection("reciever").addDocument(data: ["lat":"\(latitude)","long":"\(longitude)","userid":"\(userid!)"], completion: { (error) in
-            if let err = error {
-                print(err.localizedDescription)
+        ref.child("reciever").child(random).child("lat").setValue("\(latitude)") { (error, databaseReference) in
+            if let err = error{
+                print("error : \(err.localizedDescription)")
             }else{
-                print("added")
+                print("added latitude")
             }
-        })
+        }
+        ref.child("reciever").child(random).child("long").setValue("\(longitude)") { (error, databaseReference) in
+            if let err = error{
+                print("error : \(err.localizedDescription)")
+            }else{
+                print("added longitude")
+            }
+        }
+        ref.child("reciever").child(random).child("userid").setValue("\(userid!)") { (error, databaseReference) in
+            if let err = error{
+                print("error : \(err.localizedDescription)")
+            }else{
+                print("added userid")
+                print("sender added")
+                
+            }
+        }
+    }
+    func readnameandnumber(){
+        a1 = []
+        a2 = []
+        for i in nearby{
+            print(i)
+            ref.child("users2").child(i).observeSingleEvent(of: .value) { (dataSnapshot) in
+                let value = dataSnapshot.value as? NSDictionary
+                let username = value?["name"] as? String ?? ""
+                let phone = value?["phonenumber"] as? String ?? ""
+                self.a1.append("\(username)")
+                self.a2.append("\(phone)")
+                DispatchQueue.main.async {
+                    self.animateview.alpha = 0
+                    self.containerview.alpha = 1
+                    self.tableview.reloadData()
+                }
+            }
+        }
+    }
+    func deletereciever(){
+        ref.child("reciever").child(random).removeValue()
     }
 }
 

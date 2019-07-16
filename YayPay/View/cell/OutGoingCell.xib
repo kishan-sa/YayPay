@@ -23,21 +23,21 @@
                         <rect key="frame" x="10" y="0.0" width="172" height="97.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$45" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-8k-CWT">
-                                <rect key="frame" x="15" y="5" width="142" height="40"/>
+                                <rect key="frame" x="25" y="5" width="132" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Q8B-bX-KSs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reason" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBc-Vm-Fad">
-                                <rect key="frame" x="15" y="50" width="142" height="25"/>
+                                <rect key="frame" x="25" y="50" width="132" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="f8M-hm-J0o"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.51477527619999996" green="0.51107013229999998" blue="0.56853264569999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -45,9 +45,9 @@
                         <constraints>
                             <constraint firstItem="XBc-Vm-Fad" firstAttribute="top" secondItem="ibd-8k-CWT" secondAttribute="bottom" constant="5" id="3dA-sw-Gfb"/>
                             <constraint firstItem="ibd-8k-CWT" firstAttribute="top" secondItem="pyV-Ym-uxE" secondAttribute="top" constant="5" id="5KX-Yd-pFT"/>
-                            <constraint firstItem="ibd-8k-CWT" firstAttribute="leading" secondItem="pyV-Ym-uxE" secondAttribute="leading" constant="15" id="Oon-Na-zMV"/>
+                            <constraint firstItem="ibd-8k-CWT" firstAttribute="leading" secondItem="pyV-Ym-uxE" secondAttribute="leading" constant="25" id="Oon-Na-zMV"/>
                             <constraint firstAttribute="trailing" secondItem="XBc-Vm-Fad" secondAttribute="trailing" constant="15" id="X7t-gN-MAo"/>
-                            <constraint firstItem="XBc-Vm-Fad" firstAttribute="leading" secondItem="pyV-Ym-uxE" secondAttribute="leading" constant="15" id="p5M-rG-zJk"/>
+                            <constraint firstItem="XBc-Vm-Fad" firstAttribute="leading" secondItem="pyV-Ym-uxE" secondAttribute="leading" constant="25" id="p5M-rG-zJk"/>
                             <constraint firstAttribute="trailing" secondItem="ibd-8k-CWT" secondAttribute="trailing" constant="15" id="zs9-F6-Pvy"/>
                         </constraints>
                     </view>
@@ -63,6 +63,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="containerview" destination="pyV-Ym-uxE" id="qNP-Md-MoW"/>
                 <outlet property="moneylabel" destination="ibd-8k-CWT" id="VXv-Ax-gqC"/>
                 <outlet property="reasonlabel" destination="XBc-Vm-Fad" id="14x-oh-fUH"/>
             </connections>

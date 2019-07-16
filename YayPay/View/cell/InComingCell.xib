@@ -23,21 +23,21 @@
                         <rect key="frame" x="261.5" y="10" width="271.5" height="171.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$35" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCl-d4-WBa">
-                                <rect key="frame" x="10" y="5" width="251.5" height="40"/>
+                                <rect key="frame" x="25" y="5" width="236.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="L7E-5M-C4J"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reason" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp9-TW-IIs">
-                                <rect key="frame" x="10" y="50" width="251.5" height="25"/>
+                                <rect key="frame" x="25" y="50" width="236.5" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="PnY-FF-hHN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.51477527618408203" green="0.5110701322555542" blue="0.56853264570236206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -47,8 +47,8 @@
                             <constraint firstAttribute="trailing" secondItem="uCl-d4-WBa" secondAttribute="trailing" constant="10" id="9AK-2I-WmE"/>
                             <constraint firstAttribute="trailing" secondItem="hp9-TW-IIs" secondAttribute="trailing" constant="10" id="V5x-mL-uFN"/>
                             <constraint firstItem="uCl-d4-WBa" firstAttribute="top" secondItem="OVd-G5-xBz" secondAttribute="top" constant="5" id="iSv-0l-S5G"/>
-                            <constraint firstItem="uCl-d4-WBa" firstAttribute="leading" secondItem="OVd-G5-xBz" secondAttribute="leading" constant="10" id="m5Y-93-qtf"/>
-                            <constraint firstItem="hp9-TW-IIs" firstAttribute="leading" secondItem="OVd-G5-xBz" secondAttribute="leading" constant="10" id="oK9-WX-cb6"/>
+                            <constraint firstItem="uCl-d4-WBa" firstAttribute="leading" secondItem="OVd-G5-xBz" secondAttribute="leading" constant="25" id="m5Y-93-qtf"/>
+                            <constraint firstItem="hp9-TW-IIs" firstAttribute="leading" secondItem="OVd-G5-xBz" secondAttribute="leading" constant="25" id="oK9-WX-cb6"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -63,6 +63,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="containerview" destination="OVd-G5-xBz" id="bIV-mw-MOr"/>
                 <outlet property="moneylabel" destination="uCl-d4-WBa" id="v1z-9S-Pw1"/>
                 <outlet property="reasonlabel" destination="hp9-TW-IIs" id="p24-f7-jgY"/>
             </connections>

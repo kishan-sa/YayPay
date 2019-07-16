@@ -20,6 +20,7 @@ class ManageMoneyVC: UIViewController {
     @IBOutlet weak var expenseprogress: UICircularProgressRing!
     @IBOutlet weak var incomelabel: UILabel!
     @IBOutlet weak var expenselabel: UILabel!
+    @IBOutlet weak var addview: UIView!
     
     var db : Firestore!
     
@@ -34,17 +35,23 @@ class ManageMoneyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addview.layer.cornerRadius = 65 / 2
         inexpuiview.layer.cornerRadius = 60
         let datecomp2 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
         currentdateindex = datecomp2.month! - 1
         currentyear = datecomp2.year!
         currentdate = datecomp2.month! - 1
         datelabel.text = "\(dates[currentdate!]) \(currentyear!)"
+//        readincome()
+//        readtotalexpense()
+//        readxepenses()
+        collectionview.delegate = self
+        collectionview.dataSource = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
         readincome()
         readtotalexpense()
         readxepenses()
-        collectionview.delegate = self
-        collectionview.dataSource = self
     }
     @IBAction func backPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -73,11 +80,15 @@ class ManageMoneyVC: UIViewController {
             }
             datelabel.text = "\(dates[currentdateindex!]) \(currentyear!)"
         }
-        
+        self.incomprogress.value = 0
+        self.expenseprogress.value = 100
+        readincome()
+        readtotalexpense()
+        readxepenses()
     }
     
 }
-
+//MARK:- database methods
 extension ManageMoneyVC {
     func readincome(){
         let userid = Auth.auth().currentUser?.uid
@@ -89,7 +100,8 @@ extension ManageMoneyVC {
                 if let d = documentSnapshot?.data()?["income"]{
                     print(d)
                     
-                    self.incomelabel.text = (documentSnapshot?.data()!["income"] as! String)
+                    self.incomelabel.text = "$\((documentSnapshot?.data()!["income"] as! String))"
+                    
                     self.incomprogress.startProgress(to: 100, duration: 2)
                 }
                 
@@ -106,6 +118,7 @@ extension ManageMoneyVC {
                 if let d = documentSnapshot?.data()?["total"]{
                     print(d as! String)
                     self.expenselabel.text = (d  as! String)
+                    
                     self.expenseprogress.startProgress(to: CGFloat(Int(documentSnapshot?.data()!["total"] as! String)! / Int(documentSnapshot?.data()!["total"] as! String)!), duration: 2)
                 }
                 
@@ -113,6 +126,7 @@ extension ManageMoneyVC {
         }
     }
     func readxepenses(){
+        expenses = []
         let userid = Auth.auth().currentUser?.uid
         db = Firestore.firestore()
         db.collection("users").document("\(userid!)").collection("expense").document("\(currentdateindex!) 2019").collection("expenses").getDocuments { (querySnapshot, error) in
@@ -137,7 +151,7 @@ extension ManageMoneyVC {
     
     }
 }
-
+//MARK:- collection view methods
 extension ManageMoneyVC : UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return expenses.count
@@ -152,11 +166,12 @@ extension ManageMoneyVC : UICollectionViewDelegate,UICollectionViewDataSource{
         print("\(String(describing: expenses[indexPath.row].category))")
         
         cell.imageview.image = UIImage(named: "\(String(describing: expenses[indexPath.row].category!))")
-        cell.moneylabel.text = expenses[indexPath.row].expense
+        cell.moneylabel.text = "$\(expenses[indexPath.row].expense!)"
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //categorylabel.text = category[indexPath.row]
+        collectionView.deselectItem(at: indexPath, animated: false)
     }
 
 }
@@ -173,14 +188,11 @@ extension ManageMoneyVC : UICollectionViewDelegateFlowLayout{
         return CGSize(width: widthPerItem, height: 220)
     }
 
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
 
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
-
 }
