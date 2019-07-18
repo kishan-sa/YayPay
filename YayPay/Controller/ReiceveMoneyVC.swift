@@ -18,6 +18,7 @@ class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var animateview: UIView!
+    @IBOutlet weak var searchinglabel: UILabel!
     
     let locationManager = CLLocationManager()
     var db : Firestore!
@@ -57,9 +58,11 @@ class ReiceveMoneyVC: UIViewController ,CLLocationManagerDelegate{
         //animate image
         UIView.animate(withDuration: 2.0, animations: {() -> Void in
             self.imageview?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.searchinglabel.text = "Searching for Nearby Devices.."
         }, completion: {(_ finished: Bool) -> Void in
             UIView.animate(withDuration: 2.0, animations: {() -> Void in
                 self.imageview?.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.searchinglabel.text = "Searching for Nearby Devices..."
             })
         })
     }
@@ -137,7 +140,13 @@ extension ReiceveMoneyVC {
         arrayuser = []
         arraylong = []
         arraylat = []
+        self.a1 = []
+        self.a2 = []
         ref.child("senders").observe(.value) { (dataSnapshot) in
+            self.arrayuser = []
+            self.arraylong = []
+            self.arraylat = []
+            
             if dataSnapshot.hasChildren(){
                 let postDict = dataSnapshot.value as? [String : AnyObject] ?? [:]
                 for (_, theValue) in postDict{
@@ -153,10 +162,11 @@ extension ReiceveMoneyVC {
                         }
                     }
                 }
-                self.a1 = []
-                self.a2 = []
-                self.calculate()
+                
             }
+            self.a1 = []
+            self.a2 = []
+            self.calculate()
         }
     }
     
@@ -199,6 +209,8 @@ extension ReiceveMoneyVC {
                 let phone = value?["phonenumber"] as? String ?? ""
                 self.a1.append("\(username)")
                 self.a2.append("\(phone)")
+                print(self.a2.count)
+                
                 DispatchQueue.main.async {
                     self.animateview.alpha = 0
                     self.containerview.alpha = 1

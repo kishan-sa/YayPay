@@ -19,6 +19,7 @@
 		C82CC1C822D8576F006DD6C0 /* PinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1C722D8576F006DD6C0 /* PinVC.swift */; };
 		C82CC1CC22D86532006DD6C0 /* PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1CB22D86532006DD6C0 /* PayVC.swift */; };
 		C82CC1CE22D8B431006DD6C0 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1CD22D8B431006DD6C0 /* Payment.swift */; };
+		C8AAFA1422DF4F5100FD303D /* San Francisco Pro in Resources */ = {isa = PBXBuildFile; fileRef = C8AAFA1322DF4F5100FD303D /* San Francisco Pro */; };
 		C8F9589B22D43E3400BB9E9B /* AddEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589A22D43E3400BB9E9B /* AddEntryVC.swift */; };
 		C8F9589D22D44D2D00BB9E9B /* IncomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589C22D44D2D00BB9E9B /* IncomeVC.swift */; };
 		C8F9589F22D44D4500BB9E9B /* ExpenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589E22D44D4500BB9E9B /* ExpenseVC.swift */; };
@@ -59,6 +60,7 @@
 		C82CC1C722D8576F006DD6C0 /* PinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinVC.swift; sourceTree = "<group>"; };
 		C82CC1CB22D86532006DD6C0 /* PayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayVC.swift; sourceTree = "<group>"; };
 		C82CC1CD22D8B431006DD6C0 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		C8AAFA1322DF4F5100FD303D /* San Francisco Pro */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "San Francisco Pro"; sourceTree = "<group>"; };
 		C8F9589A22D43E3400BB9E9B /* AddEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryVC.swift; sourceTree = "<group>"; };
 		C8F9589C22D44D2D00BB9E9B /* IncomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeVC.swift; sourceTree = "<group>"; };
 		C8F9589E22D44D4500BB9E9B /* ExpenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseVC.swift; sourceTree = "<group>"; };
@@ -116,12 +118,21 @@
 				C8FB8B7A22D3658200A90219 /* View */,
 				C8FB8B7922D3656F00A90219 /* Controller */,
 				C8FB8B7422D35C0E00A90219 /* Model */,
+				C8AAFA1222DF4F3900FD303D /* fonts */,
 				C802A0B522D3210C00FF1741 /* AppDelegate.swift */,
 				C802A0BE22D3210D00FF1741 /* LaunchScreen.storyboard */,
 				C802A0C122D3210D00FF1741 /* Info.plist */,
 				C821F17B22D48EB400945161 /* GoogleService-Info.plist */,
 			);
 			path = YayPay;
+			sourceTree = "<group>";
+		};
+		C8AAFA1222DF4F3900FD303D /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C8AAFA1322DF4F5100FD303D /* San Francisco Pro */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		C8FB8B7422D35C0E00A90219 /* Model */ = {
@@ -266,6 +277,7 @@
 				C802A0C022D3210D00FF1741 /* LaunchScreen.storyboard in Resources */,
 				C8FB8B8122D3751000A90219 /* OutGoingCell.xib in Resources */,
 				C8FB8B8522D3754200A90219 /* InComingCell.xib in Resources */,
+				C8AAFA1422DF4F5100FD303D /* San Francisco Pro in Resources */,
 				C802A0BD22D3210D00FF1741 /* Assets.xcassets in Resources */,
 				C802A0BB22D3210C00FF1741 /* Main.storyboard in Resources */,
 				C821F17C22D48EB400945161 /* GoogleService-Info.plist in Resources */,

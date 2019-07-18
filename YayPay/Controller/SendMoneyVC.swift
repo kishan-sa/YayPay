@@ -32,7 +32,13 @@ class SendMoneyVC: UIViewController {
         searchbar.setImage(UIImage(named: "search"), for: .search, state: .normal)
         searchbar.layer.backgroundColor = UIColor.clear.cgColor
         searchbar.backgroundColor = UIColor.clear
-        searchbar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
+        //searchbar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
+        let searchTextField: UITextField? = searchbar.value(forKey: "searchField") as? UITextField
+        if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
+            let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            searchTextField!.attributedPlaceholder = NSAttributedString(string: "Search", attributes: attributeDict)
+            searchTextField?.backgroundColor = UIColor.clear
+        }
         ref = Database.database().reference()
         readphonenumbers()
         

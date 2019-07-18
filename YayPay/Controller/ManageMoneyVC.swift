@@ -50,7 +50,7 @@ class ManageMoneyVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         readincome()
-        readtotalexpense()
+        //readtotalexpense()
         readxepenses()
     }
     @IBAction func backPressed(_ sender: Any) {
@@ -83,7 +83,7 @@ class ManageMoneyVC: UIViewController {
         self.incomprogress.value = 0
         self.expenseprogress.value = 100
         readincome()
-        readtotalexpense()
+        //readtotalexpense()
         readxepenses()
     }
     
@@ -98,11 +98,9 @@ extension ManageMoneyVC {
                 print("error : \(err.localizedDescription)")
             }else{
                 if let d = documentSnapshot?.data()?["income"]{
-                    print(d)
-                    
-                    self.incomelabel.text = "$\((documentSnapshot?.data()!["income"] as! String))"
-                    
+                    self.incomelabel.text = "\(d)"
                     self.incomprogress.startProgress(to: 100, duration: 2)
+                    self.readtotalexpense()
                 }
                 
             }
@@ -118,8 +116,10 @@ extension ManageMoneyVC {
                 if let d = documentSnapshot?.data()?["total"]{
                     print(d as! String)
                     self.expenselabel.text = (d  as! String)
-                    
-                    self.expenseprogress.startProgress(to: CGFloat(Int(documentSnapshot?.data()!["total"] as! String)! / Int(documentSnapshot?.data()!["total"] as! String)!), duration: 2)
+                    let income = Int(self.incomelabel.text!) ?? 0
+                    let expense = Int(self.expenselabel.text!) ?? 1
+                    self.incomprogress.startProgress(to: 100 - CGFloat(expense) / CGFloat(income) * 100, duration: 2)
+                    self.expenseprogress.startProgress(to: CGFloat(expense) / CGFloat(income) * 100, duration: 2)
                 }
                 
             }

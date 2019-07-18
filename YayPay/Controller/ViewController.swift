@@ -19,7 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionview: UICollectionView!
     @IBOutlet weak var namelabel: UILabel!
     @IBOutlet weak var emaillabel: UILabel!
-    
+    @IBOutlet var backimageview: [UIImageView]!
+    @IBOutlet var nextimage: [UIImageView]!
+    @IBOutlet var label: [UILabel]!
     
     private let itemsPerRow: CGFloat = 1
     private let sectionInsets = UIEdgeInsets(top: 10.0,left: 20.0, bottom: 10.0,right: 20.0)
@@ -41,33 +43,132 @@ class ViewController: UIViewController {
     }
 
     @IBAction func sendButton(_ sender: Any) {
+        sendmoneyview.removegradient()
+        nextimage[0].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        label[0].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        backimageview[0].image = UIImage()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "sendmoney") as! SendMoneyVC
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     @IBAction func recieveButton(_ sender: Any) {
+        recievemoneyview.removegradient()
+        nextimage[1].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        label[3].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        backimageview[3].image = UIImage()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "reicevemoney") as! ReiceveMoneyVC
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     @IBAction func manageButton(_ sender: Any) {
+        managemoneyview.removegradient()
+        nextimage[2].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        label[2 ].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        backimageview[1].image = UIImage()
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "managemoney") as! ManageMoneyVC
         navigationController?.pushViewController(nextViewController, animated: true)
     }
     @IBAction func offerButton(_ sender: Any) {
-        do{
-            try Auth.auth().signOut()
-        }catch{
-            print(error)
-        }
-        
+        offersview.removegradient()
+        nextimage[3].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        label[1].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+        backimageview[2].image = UIImage()
+//        do{
+//            try Auth.auth().signOut()
+//        }catch{
+//            print(error)
+//        }
     }
     
     @IBAction func profileButton(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "profile") as! ProfileVC
+        nextViewController.name = namelabel.text!
+        nextViewController.email = emaillabel.text!
         navigationController?.pushViewController(nextViewController, animated: true)
+    }
+    
+    @IBAction func sendinside(_ sender : UIButton){
+        switch sender.tag {
+        case 1:
+            sendmoneyview.applyGradient()
+            label[0].textColor = UIColor.white
+            let origImage = UIImage(named: ">")
+            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+            nextimage[0].image = tintedImage
+            nextimage[0].tintColor = .white
+            backimageview[0].image = UIImage(named: "touch")
+        case 2:
+            recievemoneyview.applyGradient()
+            label[3].textColor = UIColor.white
+            let origImage = UIImage(named: ">")
+            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+            nextimage[1].image = tintedImage
+            nextimage[1].tintColor = .white
+            backimageview[3].image = UIImage(named: "touch")
+        case 3:
+            managemoneyview.applyGradient()
+            label[2].textColor = UIColor.white
+            let origImage = UIImage(named: ">")
+            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+            nextimage[2].image = tintedImage
+            nextimage[2].tintColor = .white
+            backimageview[1].image = UIImage(named: "touch")
+        case 4:
+            offersview.applyGradient()
+            label[1].textColor = UIColor.white
+            let origImage = UIImage(named: ">")
+            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+            nextimage[3].image = tintedImage
+            nextimage[3].tintColor = .white
+            backimageview[2].image = UIImage(named: "touch")
+        default: break
+            
+        }
+    }
+    @IBAction func sendoutside(_ sender : UIButton){
+        
+        switch sender.tag {
+        case 1:
+            sendmoneyview.removegradient()
+            nextimage[0].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            label[0].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            backimageview[0].image = UIImage()
+        case 2:
+            recievemoneyview.removegradient()
+            nextimage[1].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            label[3].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            backimageview[3].image = UIImage()
+        case 3:
+            managemoneyview.removegradient()
+            nextimage[2].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            label[2 ].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            backimageview[1].image = UIImage()
+        case 4:
+            offersview.removegradient()
+            nextimage[3].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            label[1].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
+            backimageview[2].image = UIImage()
+        default: break
+            
+        }
+    }
+    
+}
+extension UIView {
+    func applyGradient() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor(red: 142/255, green: 45/255, blue: 226/255, alpha: 1).cgColor,UIColor(red: 74/255, green: 0/255, blue: 224/255, alpha: 1).cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradient.frame = self.bounds
+        gradient.cornerRadius = self.frame.height / 2
+        self.layer.insertSublayer(gradient, at: 0)
+        
+    }
+    func removegradient(){
+        self.layer.sublayers![0] = CAGradientLayer()
     }
 }
 
@@ -103,7 +204,7 @@ extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource
 }
 extension ViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 190, height: self.collectionview.frame.height - 5)
+        return CGSize(width: 185, height: self.collectionview.frame.height - 5)
     }
     
     

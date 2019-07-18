@@ -14,8 +14,14 @@ class ProfileVC: UIViewController ,UIScrollViewDelegate{
     @IBOutlet weak var privacyview: UIView!
     @IBOutlet weak var adbutton: UIButton!
     @IBOutlet weak var scrollview: UIScrollView!
+    @IBOutlet weak var namelabel: UILabel!
+    @IBOutlet weak var emaillabel: UILabel!
+    var name = ""
+    var email = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        namelabel.text = name
+        emaillabel.text = email
         accountinfoview.layer.cornerRadius = 10
         privacyview.layer.cornerRadius = 10
         adbutton.layer.borderColor = UIColor(red: 128/255, green: 44/255, blue: 227/255, alpha: 1).cgColor
@@ -27,7 +33,7 @@ class ProfileVC: UIViewController ,UIScrollViewDelegate{
     
     override func viewWillLayoutSubviews(){
         super.viewWillLayoutSubviews()
-        scrollview.contentSize = CGSize(width:self.view.frame.width, height: self.view.frame.height + 150)
+        scrollview.contentSize = CGSize(width:self.view.frame.width, height: self.view.frame.height + 160)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //disable bounce only at the top of the screen

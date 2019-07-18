@@ -17,6 +17,7 @@ class NearbySendMoneyVC: UIViewController ,CLLocationManagerDelegate{
     @IBOutlet weak var tableviewcontainerview: UIView!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var imageview: UIImageView!
+    @IBOutlet weak var searchinglabel: UILabel!
     
     @IBOutlet weak var animateview: UIView!
     let locationManager = CLLocationManager()
@@ -54,9 +55,11 @@ class NearbySendMoneyVC: UIViewController ,CLLocationManagerDelegate{
         //animate image
         UIView.animate(withDuration: 2.0, animations: {() -> Void in
             self.imageview?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.searchinglabel.text = "Searching for Nearby Devices.."
         }, completion: {(_ finished: Bool) -> Void in
             UIView.animate(withDuration: 2.0, animations: {() -> Void in
                 self.imageview?.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.searchinglabel.text = "Searching for Nearby Devices..."
             })
         })
     }
@@ -193,6 +196,8 @@ extension NearbySendMoneyVC {
                 let phone = value?["phonenumber"] as? String ?? ""
                 self.a1.append("\(username)")
                 self.a2.append("\(phone)")
+                print("count from send")
+                print(self.a2.count)
                 DispatchQueue.main.async {
                     self.animateview.alpha = 0
                     self.tableviewcontainerview.alpha = 1

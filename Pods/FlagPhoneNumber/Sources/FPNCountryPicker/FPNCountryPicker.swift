@@ -59,7 +59,7 @@ open class FPNCountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDat
 
 	// MARK: - FPNCountry Methods
 
-	open func setCountry(_ code: FPNCountryCode) {
+    open func setCountry(_ code: FPNCountryCode) {
 		for index in 0..<countries.count {
 			if countries[index].code == code {
 				return self.setCountryByRow(row: index)
