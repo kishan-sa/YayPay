@@ -35,8 +35,8 @@ class SendMoneyVC: UIViewController {
         //searchbar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
         let searchTextField: UITextField? = searchbar.value(forKey: "searchField") as? UITextField
         if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
-            let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor.black]
-            searchTextField!.attributedPlaceholder = NSAttributedString(string: "Search", attributes: attributeDict)
+            let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor(red: 120/255, green: 119/255, blue: 134/255, alpha: 1)]
+            searchTextField!.attributedPlaceholder = NSAttributedString(string: "Search people or enter a number", attributes: attributeDict)
             searchTextField?.backgroundColor = UIColor.clear
         }
         ref = Database.database().reference()

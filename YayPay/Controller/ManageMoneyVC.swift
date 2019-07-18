@@ -42,15 +42,11 @@ class ManageMoneyVC: UIViewController {
         currentyear = datecomp2.year!
         currentdate = datecomp2.month! - 1
         datelabel.text = "\(dates[currentdate!]) \(currentyear!)"
-//        readincome()
-//        readtotalexpense()
-//        readxepenses()
         collectionview.delegate = self
         collectionview.dataSource = self
     }
     override func viewWillAppear(_ animated: Bool) {
         readincome()
-        //readtotalexpense()
         readxepenses()
     }
     @IBAction func backPressed(_ sender: Any) {

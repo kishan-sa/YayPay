@@ -11,12 +11,10 @@ import FirebaseAuth
 
 class OTPVC: UIViewController {
 
-    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var otpTF: UITextField!
     var phonenumber = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = phonenumber
     }
     
 

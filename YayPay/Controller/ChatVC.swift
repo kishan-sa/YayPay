@@ -21,10 +21,17 @@ class ChatVC: UIViewController {
     @IBOutlet weak var phonenumberlabel: UILabel!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var payview: UIView!
+    @IBOutlet weak var textfield: UITextField!
+    @IBOutlet weak var sendimageview: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sendimageview.layer.cornerRadius = 20
+        sendimageview.clipsToBounds = true
+        textfield.borderStyle = .none
+        textfield.layer.cornerRadius = 30
+        textfield.clipsToBounds = true
+        textfield.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
         ref = Database.database().reference()
         tableview.delegate = self
         tableview.dataSource = self
