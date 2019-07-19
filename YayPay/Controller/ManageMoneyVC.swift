@@ -79,7 +79,6 @@ class ManageMoneyVC: UIViewController {
         self.incomprogress.value = 0
         self.expenseprogress.value = 100
         readincome()
-        //readtotalexpense()
         readxepenses()
     }
     
@@ -110,14 +109,12 @@ extension ManageMoneyVC {
                 print("error : \(err.localizedDescription)")
             }else{
                 if let d = documentSnapshot?.data()?["total"]{
-                    print(d as! String)
                     self.expenselabel.text = (d  as! String)
                     let income = Int(self.incomelabel.text!) ?? 0
                     let expense = Int(self.expenselabel.text!) ?? 1
                     self.incomprogress.startProgress(to: 100 - CGFloat(expense) / CGFloat(income) * 100, duration: 2)
                     self.expenseprogress.startProgress(to: CGFloat(expense) / CGFloat(income) * 100, duration: 2)
                 }
-                
             }
         }
     }
@@ -131,12 +128,8 @@ extension ManageMoneyVC {
                 
             }else{
                 for document in (querySnapshot!.documents){
-                    print("documents of expences")
-                    print(document.data())
-                    
                     let data = document.data()
                     let newexp = Expense(category: data["category"] as! String, expense: data["expense"] as! String, reason: data["reason"] as! String)
-                    
                     self.expenses.append(newexp)
                 }
                 DispatchQueue.main.async {
@@ -144,7 +137,6 @@ extension ManageMoneyVC {
                 }
             }
         }
-    
     }
 }
 //MARK:- collection view methods
@@ -159,17 +151,13 @@ extension ManageMoneyVC : UICollectionViewDelegate,UICollectionViewDataSource{
         cell.contentView.layer.cornerRadius = 15
         cell.contentView.backgroundColor = UIColor.white
         cell.categorylabel.text = expenses[indexPath.row].category
-        print("\(String(describing: expenses[indexPath.row].category))")
-        
         cell.imageview.image = UIImage(named: "\(String(describing: expenses[indexPath.row].category!))")
         cell.moneylabel.text = "$\(expenses[indexPath.row].expense!)"
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //categorylabel.text = category[indexPath.row]
         collectionView.deselectItem(at: indexPath, animated: false)
     }
-
 }
 
 

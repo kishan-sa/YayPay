@@ -8,14 +8,13 @@
 
 import Foundation
 
-class Contact {
+class Contact{
     var name = ""
     var phonenumber = ""
     func format(){
         self.phonenumber = self.phonenumber.replacingOccurrences(of: " ", with: "")
         self.phonenumber = self.phonenumber.replacingOccurrences(of: "(", with: "")
         self.phonenumber = self.phonenumber.replacingOccurrences(of: ")", with: "")
-//        self.phonenumber = self.phonenumber.replacingOccurrences(of: "+", with: "")
     }
 }
 

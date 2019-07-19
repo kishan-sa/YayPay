@@ -40,8 +40,9 @@ class ViewController: UIViewController {
         managemoneyview.layer.cornerRadius = self.view.frame.height * 0.0805 / 2
         collectionview.delegate = self
         collectionview.dataSource = self
+        
     }
-
+    
     @IBAction func sendButton(_ sender: Any) {
         sendmoneyview.removegradient()
         nextimage[0].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
@@ -74,19 +75,13 @@ class ViewController: UIViewController {
         nextimage[3].tintColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
         label[1].textColor = UIColor(red: 113/255, green: 44/255, blue: 226/255, alpha: 1)
         backimageview[2].image = UIImage()
-//        do{
-//            try Auth.auth().signOut()
-//        }catch{
-//            print(error)
-//        }
     }
-    
     @IBAction func profileButton(_ sender: Any) {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "profile") as! ProfileVC
         nextViewController.name = namelabel.text!
         nextViewController.email = emaillabel.text!
-        navigationController?.pushViewController(nextViewController, animated: true)
+        navigationController?.present(nextViewController, animated: true, completion: nil)
     }
     
     @IBAction func sendinside(_ sender : UIButton){
@@ -254,6 +249,5 @@ extension ViewController{
                 }
             }
         }
-    }
-    
+    }  
 }

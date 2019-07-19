@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Text-Regular.otf">
+            <string>SFProText-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chat1" rowHeight="137" id="KGk-i7-Jjw" customClass="ComingMassage" customModule="YayPay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="137"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="136.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Hy-v1-Klz">
+                        <rect key="frame" x="10" y="10" width="160" height="116.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Massage" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqw-3a-aye">
+                                <rect key="frame" x="20" y="10" width="130" height="21.5"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="18"/>
+                                <color key="textColor" red="0.47058823529999999" green="0.46666666670000001" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vqw-3a-aye" secondAttribute="trailing" constant="10" id="0Ut-NZ-nlA"/>
+                            <constraint firstItem="vqw-3a-aye" firstAttribute="top" secondItem="8Hy-v1-Klz" secondAttribute="top" constant="10" id="VM3-Sf-MGh"/>
+                            <constraint firstItem="vqw-3a-aye" firstAttribute="leading" secondItem="8Hy-v1-Klz" secondAttribute="leading" constant="20" id="WNs-GX-ACN"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8Hy-v1-Klz" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="VsJ-9D-IQh"/>
+                    <constraint firstItem="8Hy-v1-Klz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="XT5-An-8VN"/>
+                    <constraint firstItem="8Hy-v1-Klz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="a0U-Lw-eyR"/>
+                    <constraint firstAttribute="bottom" secondItem="8Hy-v1-Klz" secondAttribute="bottom" constant="10" id="cis-sw-Ui0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="massagelael" destination="vqw-3a-aye" id="AZ4-1r-owa"/>
+                <outlet property="uiview" destination="8Hy-v1-Klz" id="xG6-ef-uZc"/>
+            </connections>
+            <point key="canvasLocation" x="44.799999999999997" y="79.610194902548727"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -19,6 +19,10 @@
 		C82CC1C822D8576F006DD6C0 /* PinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1C722D8576F006DD6C0 /* PinVC.swift */; };
 		C82CC1CC22D86532006DD6C0 /* PayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1CB22D86532006DD6C0 /* PayVC.swift */; };
 		C82CC1CE22D8B431006DD6C0 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CC1CD22D8B431006DD6C0 /* Payment.swift */; };
+		C873404B22E193FF006AFA2E /* ChatMassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C873404922E193FF006AFA2E /* ChatMassage.swift */; };
+		C873404C22E193FF006AFA2E /* ChatMassage.xib in Resources */ = {isa = PBXBuildFile; fileRef = C873404A22E193FF006AFA2E /* ChatMassage.xib */; };
+		C873405322E1B438006AFA2E /* ComingMassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C873405122E1B438006AFA2E /* ComingMassage.swift */; };
+		C873405422E1B438006AFA2E /* ComingMassage.xib in Resources */ = {isa = PBXBuildFile; fileRef = C873405222E1B438006AFA2E /* ComingMassage.xib */; };
 		C8AAFA1422DF4F5100FD303D /* San Francisco Pro in Resources */ = {isa = PBXBuildFile; fileRef = C8AAFA1322DF4F5100FD303D /* San Francisco Pro */; };
 		C8F9589B22D43E3400BB9E9B /* AddEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589A22D43E3400BB9E9B /* AddEntryVC.swift */; };
 		C8F9589D22D44D2D00BB9E9B /* IncomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F9589C22D44D2D00BB9E9B /* IncomeVC.swift */; };
@@ -60,6 +64,10 @@
 		C82CC1C722D8576F006DD6C0 /* PinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinVC.swift; sourceTree = "<group>"; };
 		C82CC1CB22D86532006DD6C0 /* PayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayVC.swift; sourceTree = "<group>"; };
 		C82CC1CD22D8B431006DD6C0 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		C873404922E193FF006AFA2E /* ChatMassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMassage.swift; sourceTree = "<group>"; };
+		C873404A22E193FF006AFA2E /* ChatMassage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMassage.xib; sourceTree = "<group>"; };
+		C873405122E1B438006AFA2E /* ComingMassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingMassage.swift; sourceTree = "<group>"; };
+		C873405222E1B438006AFA2E /* ComingMassage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComingMassage.xib; sourceTree = "<group>"; };
 		C8AAFA1322DF4F5100FD303D /* San Francisco Pro */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "San Francisco Pro"; sourceTree = "<group>"; };
 		C8F9589A22D43E3400BB9E9B /* AddEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryVC.swift; sourceTree = "<group>"; };
 		C8F9589C22D44D2D00BB9E9B /* IncomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeVC.swift; sourceTree = "<group>"; };
@@ -180,6 +188,10 @@
 		C8FB8B7B22D3658900A90219 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				C873405122E1B438006AFA2E /* ComingMassage.swift */,
+				C873405222E1B438006AFA2E /* ComingMassage.xib */,
+				C873404922E193FF006AFA2E /* ChatMassage.swift */,
+				C873404A22E193FF006AFA2E /* ChatMassage.xib */,
 				C8FB8B8222D3754200A90219 /* InComingCell.swift */,
 				C8FB8B8322D3754200A90219 /* InComingCell.xib */,
 				C8FB8B7E22D3751000A90219 /* OutGoingCell.swift */,
@@ -275,11 +287,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C802A0C022D3210D00FF1741 /* LaunchScreen.storyboard in Resources */,
+				C873404C22E193FF006AFA2E /* ChatMassage.xib in Resources */,
 				C8FB8B8122D3751000A90219 /* OutGoingCell.xib in Resources */,
 				C8FB8B8522D3754200A90219 /* InComingCell.xib in Resources */,
 				C8AAFA1422DF4F5100FD303D /* San Francisco Pro in Resources */,
 				C802A0BD22D3210D00FF1741 /* Assets.xcassets in Resources */,
 				C802A0BB22D3210C00FF1741 /* Main.storyboard in Resources */,
+				C873405422E1B438006AFA2E /* ComingMassage.xib in Resources */,
 				C821F17C22D48EB400945161 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,9 +360,11 @@
 				C8FB8B8422D3754200A90219 /* InComingCell.swift in Sources */,
 				C8FA66BF22D5A03D007C32A9 /* CardCell.swift in Sources */,
 				C8FB8B8922D37B3500A90219 /* ManageMoneyVC.swift in Sources */,
+				C873404B22E193FF006AFA2E /* ChatMassage.swift in Sources */,
 				C8FB8B8022D3751000A90219 /* OutGoingCell.swift in Sources */,
 				C8FB8B8722D37AFE00A90219 /* ReiceveMoneyVC.swift in Sources */,
 				C8FB8B7822D3640D00A90219 /* ContactCell.swift in Sources */,
+				C873405322E1B438006AFA2E /* ComingMassage.swift in Sources */,
 				C8FD06D122D5EDE20018A537 /* ExpenseCell.swift in Sources */,
 				C8FB8B7622D35C3600A90219 /* Contact.swift in Sources */,
 				C802A0B822D3210C00FF1741 /* ViewController.swift in Sources */,

@@ -43,12 +43,7 @@ class PayVC: UIViewController {
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
-        print(reasonTF.text!)
-        print(moneyTF.text!)
-        addpayment()
-        print("time String : \(Date().description)")
-        //addpaymentforreciever()
-        //formatdate()
+        addpayment2()
     }
     @IBAction func backpressed(_ sender: Any) {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
@@ -64,37 +59,38 @@ extension PayVC : UITextFieldDelegate{
 }
 
 extension PayVC {
-    func addpayment(){
+    
+    func addpayment2(){
+        
         let userid = Auth.auth().currentUser?.uid
-        
-        ref.child("payments").child("\(userid!)").child("\(recieverid)").child(random).child("amount").setValue("\(moneyTF.text!)", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
+        let ref1 = ref.child("chat").child("\(userid!)").child("\(recieverid)").child("\(formatdate())")
+        ref1.child("amount").setValue("\(moneyTF.text!)", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
                 //print("payment success")
             }
         })
-        ref.child("payments").child("\(userid!)").child("\(recieverid)").child(random).child("reason").setValue("\(reasonTF.text!)", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
+        ref1.child("reason").setValue("\(reasonTF.text!)", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
                 //print("payment success")
             }
         })
-        ref.child("payments").child("\(userid!)").child("\(recieverid)").child(random).child("time").setValue("\(formatdate())", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
+        ref1.child("iam").setValue("sender", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
             }
         })
-        ref.child("payments").child("\(userid!)").child("\(recieverid)").child(random).child("iam").setValue("sender", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
+        ref1.child("type").setValue("p", andPriority: nil, withCompletionBlock: { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
-                self.addpaymentforreciever()
+                self.addpaymentforreciever2()
             }
         })
-        
     }
     func formatdate() -> Int{
         let date = Date().description
@@ -107,41 +103,40 @@ extension PayVC {
         return integerdate
     }
     func reduserid(){
-        print("phonumber")
-        print(phonenumber)
-        
         ref.child("users").child("\(phonenumber)").observeSingleEvent(of: .value) { (snapshot) in
             if let value = snapshot.value as? NSDictionary{
                 self.recieverid = (value["uid"] as? String)!
             }
         } 
     }
-    func addpaymentforreciever(){
+    func addpaymentforreciever2(){
         let userid = Auth.auth().currentUser?.uid
-        ref.child("payments").child(recieverid).child(userid!).child(random).child("amount").setValue(moneyTF.text!, andPriority: nil) { (error, databaseReference) in
+        let ref1 = ref.child("chat").child(recieverid).child(userid!).child("\(formatdate())")
+        ref1.child("amount").setValue(moneyTF.text!, andPriority: nil) { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
             }
         }
-        ref.child("payments").child(recieverid).child(userid!).child(random).child("reason").setValue(reasonTF.text!, andPriority: nil) { (error, databaseReference) in
+        ref1.child("reason").setValue(reasonTF.text!, andPriority: nil) { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
                 
             }
         }
-        ref.child("payments").child(recieverid).child(userid!).child(random).child("iam").setValue("r", andPriority: nil) { (error, databaseReference) in
+        ref1.child("type").setValue("p", andPriority: nil) { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
             }else{
+                
             }
         }
-        ref.child("payments").child(recieverid).child(userid!).child(random).child("time").setValue("\(formatdate())", andPriority: nil) { (error, databaseReference) in
+        ref1.child("iam").setValue("r", andPriority: nil) { (error, databaseReference) in
             if let err = error{
                 print("errrrrrrrrrr--------\(err.localizedDescription)")
-            }else{
-                print("payment successš")
+            }else{  
+                print("payment success")
                 let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
                 self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
             }

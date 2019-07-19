@@ -32,7 +32,6 @@ class SendMoneyVC: UIViewController {
         searchbar.setImage(UIImage(named: "search"), for: .search, state: .normal)
         searchbar.layer.backgroundColor = UIColor.clear.cgColor
         searchbar.backgroundColor = UIColor.clear
-        //searchbar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
         let searchTextField: UITextField? = searchbar.value(forKey: "searchField") as? UITextField
         if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
             let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor(red: 120/255, green: 119/255, blue: 134/255, alpha: 1)]
@@ -62,14 +61,7 @@ class SendMoneyVC: UIViewController {
             newcontact.phonenumber = i.phoneNumbers[0].value.stringValue
             newcontact.format()
             checkphone(number: newcontact)
-            
-            //contactsmodel.append(newcontact)
-            
         }
-        //print(contactsmodel.last!.phonenumber)
-        
-        //reload table after model is loaded
-        //tableview.reloadData()
     }
 
     @IBAction func backPressed(_ sender: Any) {
@@ -81,8 +73,6 @@ class SendMoneyVC: UIViewController {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "near") as! NearbySendMoneyVC
         navigationController?.pushViewController(nextViewController, animated: true)
     }
-   
-    
 }
 
 
@@ -141,7 +131,6 @@ extension SendMoneyVC{
             }
         }) { (error) in
             print(error.localizedDescription)
-            
         }
     }
 }

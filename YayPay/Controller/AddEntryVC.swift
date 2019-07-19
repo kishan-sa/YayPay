@@ -74,8 +74,7 @@ class AddEntryVC: UIViewController {
             expenseview.alpha = 0
             transferview.alpha = 1
             
-        default:
-            print("")
+        default: break
         }
     }
     @IBAction func backPressed(_ sender: Any) {

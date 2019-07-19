@@ -71,7 +71,6 @@ class NearbySendMoneyVC: UIViewController ,CLLocationManagerDelegate{
         let location = locations.first
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
-        print("sender : \t longitude = \(location!.coordinate.longitude),  latitude = \(location!.coordinate.latitude)")
         latitude = Double(location!.coordinate.latitude)
         longitude = Double(location!.coordinate.longitude)
         addlocation()
@@ -90,17 +89,19 @@ class NearbySendMoneyVC: UIViewController ,CLLocationManagerDelegate{
             let coordinate1 = CLLocation(latitude: latitude, longitude: longitude)
             
             let distanceInMeters = coordinate0.distance(from: coordinate1)
-            print("distance : \(distanceInMeters)")
+            print(distanceInMeters)
             if distanceInMeters <= 50 {
                 nearby.append(arrayuser[item])
                 print(arrayuser[item])
             }
-        }
-        print(nearby)
-        if nearby.count != 0{
-            readnameandnumber()
             
+        }
+        if nearby.count != 0{
+            nearby = nearby.removingDuplicates()
+            readnameandnumber()
             if a1.count != 0 {
+                a1 = a1.removingDuplicates()
+                a2 = a2.removingDuplicates()
                 tableview.reloadData()
                 animateview.alpha = 0
                 tableviewcontainerview.alpha = 1
@@ -153,7 +154,6 @@ extension NearbySendMoneyVC {
             if let err = error{
                 print("error : \(err.localizedDescription)")
             }else{
-                print("added latitude")
                 print("added sender")
             }
         }
@@ -188,19 +188,18 @@ extension NearbySendMoneyVC {
     func readnameandnumber(){
         a1 = []
         a2 = []
-        for i in nearby{
-            print(i)    
+        for i in nearby{   
             ref.child("users2").child(i).observeSingleEvent(of: .value) { (dataSnapshot) in
                 let value = dataSnapshot.value as? NSDictionary
                 let username = value?["name"] as? String ?? ""
                 let phone = value?["phonenumber"] as? String ?? ""
                 self.a1.append("\(username)")
                 self.a2.append("\(phone)")
-                print("count from send")
-                print(self.a2.count)
                 DispatchQueue.main.async {
                     self.animateview.alpha = 0
                     self.tableviewcontainerview.alpha = 1
+                    self.a1 = self.a1.removingDuplicates()
+                    self.a2 = self.a2.removingDuplicates()
                     self.tableview.reloadData()
                 }
             }

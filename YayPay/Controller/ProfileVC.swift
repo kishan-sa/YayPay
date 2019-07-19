@@ -40,6 +40,6 @@ class ProfileVC: UIViewController ,UIScrollViewDelegate{
         scrollview.bounces = scrollview.contentOffset.y > 100
     }
     @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
 }

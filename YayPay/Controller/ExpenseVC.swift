@@ -39,11 +39,7 @@ class ExpenseVC: UIViewController {
         addexpenseview.layer.cornerRadius = 30
         
         let datecomp2 = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
-//        currentdateindex = datecomp2.month! - 1
-//        currentyear = datecomp2.year!
-//        currentdate = datecomp2.month! - 1
         datestring = "\(datecomp2.month! - 1) \(datecomp2.year!)"
-        //readtotalexp()
     }
     
     @IBAction func addexp(_ sender: Any) {
